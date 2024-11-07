@@ -4,13 +4,13 @@ import {Button} from "primeng/button";
 import {ToolbarModule} from "primeng/toolbar";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {InputTextModule} from "primeng/inputtext";
-import {OverlayPanel, OverlayPanelModule} from "primeng/overlaypanel";
+import {OverlayPanelModule} from "primeng/overlaypanel";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {ChipsModule} from "primeng/chips";
 import {NgIf} from "@angular/common";
 import {PanelModule} from "primeng/panel";
+import {DataService} from "./data.service";
 
 @Component({
   selector: 'app-root',
@@ -29,8 +29,9 @@ export class AppComponent {
     }
   };
   private socials: any;
+  jsonData: any;
 
-  constructor() {
+  constructor(private dataService: DataService) {
     this.socials = {
       'linkedin': {
         title: 'LinkedIn',
@@ -63,6 +64,19 @@ export class AppComponent {
 
 
     }
+
+
+    this.dataService.getJsonData().subscribe({
+        next: data => {
+          this.jsonData = data;
+        },
+        error: err => {
+        },
+        complete: () => {
+        }
+      }
+    );
+
   }
 
   onSocialClicked(selectedSocial: string) {

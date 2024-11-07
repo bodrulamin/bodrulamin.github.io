@@ -1,13 +1,13 @@
 {
-  "name": "bodrulamin.web.app",
+  "name": "bodrulamin.github.io",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:bodrulamin.web.app": "node dist/bodrulamin.web.app/server/server.mjs"
+    "serve:ssr:bodrulamin.github.io": "node dist/bodrulamin.github.io/server/server.mjs"
   },
   "private": true,
   "dependencies": {
