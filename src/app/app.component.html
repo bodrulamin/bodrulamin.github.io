@@ -1,5 +1,5 @@
-<p-toolbar>
-  <div class="p-toolbar-group-start">
+<p-toolbar [styleClass]="'surface-300'">
+  <div class="p-toolbar-group-start ">
     <p-button [text]="true" icon="pi pi-web" label="bodrulamin"/>
   </div>
   <div class="p-toolbar-group-center">
@@ -42,13 +42,28 @@
                 severity="success"/>
     </div>
     <div class="sm:col-11 md:col-8 lg:col-8">
-      <p-panel #aboutMe header="about-me" class="w-full" [toggleable]="true">
+      <p-card #aboutMe header="about-me" class="w-full" >
         <p>
-          {{jsonData.aboutMe}}
+          {{jsonData?.aboutMe}}
 
         </p>
-      </p-panel>
-      <p-panel #skill header="skill" class="col-8" [toggleable]="true">
+      </p-card>
+
+      <p-card #skill header="skill" class="col-8" >
+        <div >
+          <table>
+            <tr *ngFor="let entry of jsonData?.skills | keyvalue">
+              <td><b>{{ entry.key }}: </b> </td>
+              <td>
+                <p-chip *ngFor="let s of entry.value.split(',')" label="{{ s }}" icon="{{icons.get(s)}}" />
+              </td>
+
+            </tr>
+          </table>
+          <p>
+        </div>
+      </p-card>
+      <p-card #portfolio header="portfolio" class="col-8" >
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
           standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
@@ -60,20 +75,7 @@
           versions
           of Lorem Ipsum.
         </p>
-      </p-panel>
-      <p-panel #portfolio header="portfolio" class="col-8" [toggleable]="true">
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make
-          a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-          containing
-          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-          versions
-          of Lorem Ipsum.
-        </p>
-      </p-panel>
+      </p-card>
 
 
     </div>

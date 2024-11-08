@@ -8,14 +8,21 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {ChipsModule} from "primeng/chips";
-import {NgIf} from "@angular/common";
+import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {PanelModule} from "primeng/panel";
 import {DataService} from "./data.service";
+import {CardModule} from "primeng/card";
+import {ChipModule} from "primeng/chip";
+
+class JsonData {
+  aboutMe = '' ;
+  skills: Map<String, String> = new Map();
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -29,7 +36,8 @@ export class AppComponent {
     }
   };
   private socials: any;
-  jsonData: any;
+  jsonData: JsonData | undefined;
+  icons= new Map([['Java','fa-brands fa-java']]);
 
   constructor(private dataService: DataService) {
     this.socials = {
