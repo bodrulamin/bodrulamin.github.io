@@ -10,14 +10,11 @@ import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {ChipsModule} from "primeng/chips";
 import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {PanelModule} from "primeng/panel";
-import {DataService} from "./data.service";
+import {DataService} from "./data/data.service";
 import {CardModule} from "primeng/card";
 import {ChipModule} from "primeng/chip";
+import {jsonData} from "./data/dummy.data";
 
-class JsonData {
-  aboutMe = '' ;
-  skills: Map<String, String> = new Map();
-}
 
 @Component({
   selector: 'app-root',
@@ -36,7 +33,7 @@ export class AppComponent {
     }
   };
   private socials: any;
-  jsonData: JsonData | undefined;
+  jsonData = jsonData;
   icons= new Map([['Java','fa-brands fa-java']]);
 
   constructor(private dataService: DataService) {

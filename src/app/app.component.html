@@ -44,7 +44,7 @@
     <div class="sm:col-11 md:col-8 lg:col-8">
       <p-card #aboutMe header="about-me" class="w-full" >
         <p>
-          {{jsonData?.aboutMe}}
+          {{jsonData.aboutMe}}
 
         </p>
       </p-card>
@@ -52,7 +52,7 @@
       <p-card #skill header="skill" class="col-8" >
         <div >
           <table>
-            <tr *ngFor="let entry of jsonData?.skills | keyvalue">
+            <tr *ngFor="let entry of jsonData?.skill | keyvalue">
               <td><b>{{ entry.key }}: </b> </td>
               <td>
                 <p-chip *ngFor="let s of entry.value.split(',')" label="{{ s }}" icon="{{icons.get(s)}}" />
