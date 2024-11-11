@@ -14,12 +14,13 @@ import {DataService} from "./data/data.service";
 import {CardModule} from "primeng/card";
 import {ChipModule} from "primeng/chip";
 import {jsonData} from "./data/dummy.data";
+import {TagModule} from "primeng/tag";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
