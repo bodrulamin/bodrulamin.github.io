@@ -1,14 +1,18 @@
 export const jsonData = {
-  aboutMe: "",
+  aboutMe: "Software engineer with 3+ years of experience in Java, Spring Boot, and Angular. Skilled in optimizing\n" +
+    "high-load systems, AWS cloud, and resolving customer issues. Experienced in on-call support and mentoring junior developers.\n" +
+    "Focused on building scalable applications and improving system performance.",
   contact: [
     "Phone = +8801725717136",
     "LinkedIn = https://linkedin/in/bodrulamin",
     "Github = https://github.com/bodrulamin",
     "Website = https://bodrulamin.github.io",
   ],
-  skill: {
-    "Lanugages": "Java, Javascript",
-  },
+  skill: [
+   "Java, Javascript, Typescript",
+   "Spring Boot, Hibernate, Angular, AngularJS",
+    "PostgreSQL, Oracle, Firestore"
+  ],
   experience: [
     {
       "title": "Software Engineer",

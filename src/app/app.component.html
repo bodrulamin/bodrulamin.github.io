@@ -1,90 +1,78 @@
-<p-toolbar [styleClass]="'surface-300'">
-  <div class="p-toolbar-group-start ">
-    <p-button [text]="true" icon="pi pi-web" label="bodrulamin"/>
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin" />
   </div>
-  <div class="p-toolbar-group-center">
 
-  </div>
-  <div class="p-toolbar-group-end">
-
-    <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView(({ behavior: 'smooth' }))"
-              severity="secondary" label="about"></p-button>
-    <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView(({ behavior: 'smooth' }))"
-              severity="danger" label="skills"></p-button>
-    <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView(({ behavior: 'smooth' }))"
-              severity="secondary" label="portfolio"></p-button>
-    <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView(({ behavior: 'smooth' }))"
-              severity="secondary" label="experience"></p-button>
-    <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="education" label="education"></p-button>
+  <div class="p-toolbar-group-end flex flex-wrap">
+    <p-button [text]="true" icon="pi pi-moon" label="Dark Mode" (click)="toggleDarkMode()"></p-button>
+    <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+              severity="secondary" label="About"></p-button>
+    <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+              severity="danger" label="Skills"></p-button>
+    <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+              severity="secondary" label="Portfolio"></p-button>
+    <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+              severity="secondary" label="Experience"></p-button>
+    <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="education" label="Education"></p-button>
     <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="contact-me"
-              label="contact-me"></p-button>
-
+              label="Contact Me"></p-button>
   </div>
 </p-toolbar>
+
 <div class="w-full mt-5">
   <div class="flex flex-column align-items-center gap-2">
+    <!-- Profile Picture -->
     <div class="w-7rem h-7rem border-circle overflow-hidden shadow-8">
       <img src="https://bodrulamin.github.io/images/bodrulamin-pic.jpg" class="w-full h-full object-cover"
-           alt="bodrulamin-photo">
+           alt="Bodrul Amin Photo">
     </div>
 
-    <div class="text-center font-bold mt-4 text-600 text-3xl"> Bodrul Amin</div>
+    <!-- Name and Title -->
+    <div class="text-center font-bold mt-4 text-600 text-3xl">Bodrul Amin</div>
     <div class="text-center text-400 text-1xl">Software Engineer</div>
 
+    <!-- Social Media Buttons -->
     <div class="flex flex-row gap-2 pt-1">
-      <p-button [outlined]="false" (onClick)="socialOp.show($event);onSocialClicked('linkedin')"
-                icon="fa-brands fa-linkedin-in"/>
-      <p-button [outlined]="false" (onClick)="socialOp.show($event);onSocialClicked('email')" icon="fa fa-envelope"
-                severity="danger"/>
-      <p-button [outlined]="false" (onClick)="socialOp.show($event);onSocialClicked('github')"
-                icon="fa-brands fa-github" severity="secondary"/>
-      <p-button [outlined]="false" (onClick)="socialOp.show($event);onSocialClicked('phone')" icon="fa fa-phone"
-                severity="success"/>
+      <p-button [outlined]="false" (onClick)="socialOp.show($event); onSocialClicked('linkedin')"
+                icon="fa-brands fa-linkedin-in" severity="info" />
+      <p-button [outlined]="false" (onClick)="socialOp.show($event); onSocialClicked('email')" icon="fa fa-envelope"
+                severity="danger" />
+      <p-button [outlined]="false" (onClick)="socialOp.show($event); onSocialClicked('github')"
+                icon="fa-brands fa-github" severity="secondary" />
+      <p-button [outlined]="false" (onClick)="socialOp.show($event); onSocialClicked('phone')" icon="fa fa-phone"
+                severity="success" />
     </div>
+
+    <!-- About Me Section -->
     <div class="sm:col-11 md:col-8 lg:col-8">
-      <p-card #aboutMe header="about-me" class="w-full" >
-        <p>
-          {{jsonData.aboutMe}}
-
-        </p>
+      <p-card #aboutMe header="About Me" class="w-full">
+        <p>{{ jsonData.aboutMe }}</p>
       </p-card>
 
-      <p-card #skill header="skill" class="col-8" >
-        <div >
-          <table>
-            <tr *ngFor="let entry of jsonData?.skill | keyvalue">
-              <td><b>{{ entry.key }}: </b> </td>
-              <td>
-                <p-chip *ngFor="let s of entry.value.split(',')" label="{{ s }}" icon="{{icons.get(s)}}" />
-              </td>
+      <!-- Skills Section -->
+      <p-card #skill header="Skills" class="w-full">
+        <div class="flex justify-content-center">
+          <span *ngFor="let skill of jsonData?.skill">
+            <p-tag class="p-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
+                   value="{{ s }}" />
+          </span>
 
-            </tr>
-          </table>
-          <p>
+
         </div>
+
       </p-card>
-<p-tag severity="info" value="Angular"></p-tag>
-      <p-card #portfolio header="portfolio" class="col-8" >
+
+      <!-- Portfolio Section -->
+      <p-card #portfolio header="Portfolio" class="w-full">
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make
-          a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-          containing
-          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-          versions
-          of Lorem Ipsum.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry...
         </p>
       </p-card>
-
-
     </div>
-
   </div>
-
-
 </div>
+
+<!-- Overlay Panel for Social Links -->
 <p-overlayPanel #socialOp>
   <div class="flex flex-column gap-3 w-25rem">
     <div>

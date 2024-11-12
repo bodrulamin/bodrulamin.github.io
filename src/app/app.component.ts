@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {Button} from "primeng/button";
 import {ToolbarModule} from "primeng/toolbar";
@@ -8,7 +8,7 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {ChipsModule} from "primeng/chips";
-import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
+import {DOCUMENT, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {PanelModule} from "primeng/panel";
 import {DataService} from "./data/data.service";
 import {CardModule} from "primeng/card";
@@ -33,9 +33,12 @@ export class AppComponent {
     onClick: () => {
     }
   };
+  severities = ["success", "secondary", "info", "warning", "danger", "contrast"];
+severityMap = new Map();
   private socials: any;
   jsonData = jsonData;
   icons= new Map([['Java','fa-brands fa-java']]);
+  private isDarkMode: boolean | undefined;
 
   constructor(private dataService: DataService) {
     this.socials = {
@@ -62,7 +65,7 @@ export class AppComponent {
       },
       'phone': {
         title: 'Phone Number',
-        value: 'bodrulaminiu@gmail.com', canCopy: true,
+        value: '+8801725717136', canCopy: true,
         onClick: () => {
           window.open('tel:' + this.social.value);
         }
@@ -91,5 +94,31 @@ export class AppComponent {
 
   copyValue() {
 
+  }
+
+  // Function to get a random severity
+  getRandomSeverity(s:any): any {
+    const randomIndex = Math.floor(Math.random() * this.severities.length);
+    if(this.severityMap.get(s)){
+      this.severityMap.get(s)
+    } else {
+      this.severityMap.set(s,this.severities[randomIndex]) ;
+          }
+    return this.severityMap.get(s)
+  }
+
+
+  #document = inject(DOCUMENT);
+  toggleDarkMode() {
+    const linkElement = this.#document.getElementById(
+      'app-theme',
+    ) as HTMLLinkElement;
+    if (linkElement.href.includes('light')) {
+      linkElement.href = 'theme-dark.css';
+      this.isDarkMode = true;
+    } else {
+      linkElement.href = 'theme-light.css';
+      this.isDarkMode = false;
+    }
   }
 }
