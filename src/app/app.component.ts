@@ -15,12 +15,14 @@ import {CardModule} from "primeng/card";
 import {ChipModule} from "primeng/chip";
 import {jsonData} from "./data/dummy.data";
 import {TagModule} from "primeng/tag";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {FormsModule} from "@angular/forms";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -38,7 +40,6 @@ severityMap = new Map();
   private socials: any;
   jsonData = jsonData;
   icons= new Map([['Java','fa-brands fa-java']]);
-  private isDarkMode: boolean | undefined;
 
   constructor(private dataService: DataService) {
     this.socials = {
@@ -109,6 +110,7 @@ severityMap = new Map();
 
 
   #document = inject(DOCUMENT);
+  isDarkMode: any;
   toggleDarkMode() {
     const linkElement = this.#document.getElementById(
       'app-theme',
