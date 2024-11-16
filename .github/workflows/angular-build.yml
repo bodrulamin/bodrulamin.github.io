@@ -30,7 +30,7 @@ jobs:
 
       # Step 4: Build Angular Application
       - name: Build Angular
-        run: npm run build -- --prod
+        run: npm run build -c=production
 
       # Step 5: Upload Build Artifacts (Optional)
       - name: Upload Build Artifacts
