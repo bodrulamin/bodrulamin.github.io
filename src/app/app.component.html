@@ -1,6 +1,6 @@
 <p-toolbar>
   <div class="p-toolbar-group-start">
-    <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin" />
+    <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin"/>
   </div>
   <div class="p-toolbar-group-center">
   </div>
@@ -11,15 +11,17 @@
               severity="secondary" label="About"></p-button>
     <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
               severity="danger" label="Skills"></p-button>
+    <p-button [text]="true" (onClick)="experience.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+              severity="secondary" label="Experience"></p-button>
     <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
               severity="secondary" label="Portfolio"></p-button>
-    <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
-              severity="secondary" label="Experience"></p-button>
+
     <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="education" label="Education"></p-button>
     <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="contact-me"
               label="Contact Me"></p-button>
 
-    <p-button [text]="true" severity="secondary" icon="pi pi-moon" [label]="isDarkMode ? 'Light Mode' : 'Dark Mode'" (click)="toggleDarkMode()"></p-button>
+    <p-button [text]="true" severity="secondary" icon="pi pi-moon" [label]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
+              (click)="toggleDarkMode()"></p-button>
 
   </div>
 </p-toolbar>
@@ -28,7 +30,7 @@
   <div class="flex flex-column align-items-center gap-2">
     <!-- Profile Picture -->
     <div class="w-7rem h-7rem border-circle overflow-hidden shadow-8">
-      <img src="https://bodrulamin.github.io/images/bodrulamin-pic.jpg" class="w-full h-full object-cover"
+      <img src="/photo.jpeg" class="w-full h-full object-cover"
            alt="Bodrul Amin Photo">
     </div>
 
@@ -38,19 +40,23 @@
     <!-- Social Media Contacts -->
     <div class="flex flex-row gap-2 pt-2">
       <div class="flex flex-column items-center">
-        <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info" (click)="onSocialClicked('linkedin')"></p-button>
+        <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
+                  (click)="onSocialClicked('linkedin')"></p-button>
       </div>
 
       <div class="flex flex-column items-center">
-        <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger" (click)="onSocialClicked('email')"></p-button>
+        <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
+                  (click)="onSocialClicked('email')"></p-button>
       </div>
 
       <div class="flex flex-column items-center">
-        <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary" (click)="onSocialClicked('github')"></p-button>
+        <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary"
+                  (click)="onSocialClicked('github')"></p-button>
       </div>
 
       <div class="flex flex-column items-center">
-        <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success" (click)="onSocialClicked('phone')"></p-button>
+        <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success"
+                  (click)="onSocialClicked('phone')"></p-button>
       </div>
     </div>
 
@@ -67,7 +73,7 @@
           <div class="flex justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
             <p-tag class="p-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
-                   value="{{ s }}" />
+                   value="{{ s }}"/>
           </span>
 
 
@@ -76,6 +82,31 @@
         </p-card>
 
         <!-- Portfolio Section -->
+        <p-card #experience header="Experience" class="w-full">
+
+          <p-timeline [value]="events">
+            <ng-template pTemplate="marker" let-event>
+        <span
+          class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1"
+          [style]="{ 'background-color': event.color }">
+            <i [class]="event.icon"></i>
+        </span>
+            </ng-template>
+            <ng-template class="pt-3" pTemplate="content" let-event>
+              <div class="p-3"></div>
+              <small class="p-text-secondary">{{ event.date }}</small>
+              <ul>
+                <li *ngFor="let line of event.description.split('\n')">{{ line }}</li>
+              </ul>
+            </ng-template>
+            <ng-template pTemplate="opposite" let-event>
+              <p-card class="px-2" [header]="event.designation" [subheader]="event.company">
+              </p-card>
+            </ng-template>
+          </p-timeline>
+
+
+        </p-card>
         <p-card #portfolio header="Portfolio" class="w-full">
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry...

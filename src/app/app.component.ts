@@ -17,12 +17,13 @@ import {jsonData} from "./data/dummy.data";
 import {TagModule} from "primeng/tag";
 import {InputSwitchModule} from "primeng/inputswitch";
 import {FormsModule} from "@angular/forms";
+import {TimelineModule} from "primeng/timeline";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -36,7 +37,42 @@ export class AppComponent {
     }
   };
   severities = ["success", "secondary", "info", "warning", "danger", "contrast"];
-severityMap = new Map();
+  events = [
+    {
+      designation: 'Software Engineer',
+      company: 'Millennium Information Solution Ltd.',
+      date: 'Sep 2024 – Present',
+      description: 'Working as a developer in an agile team, contributing to Ababil-NG, one of the top 3 Islamic Core Banking Solutions in Bangladesh.\n' +
+        'Responsibilities include designing, coding, and delivering new modules, adding new features, optimizing performance, and fixing bugs.\n' +
+        'Managing the Swift-Middleware project.\n' +
+        'Reviewing code from junior developers and mentoring them on best practices.',
+      image: null,
+      color: '#007BFF',
+      icon: 'pi pi-briefcase'
+    },
+    {
+      designation: 'Assistant Software Engineer',
+    company: 'Millennium Information Solution Ltd.',
+      date: 'May 2022 – Aug 2024',
+      description: 'Contributed to multiple microservice projects using Java Spring Boot, adding new features and improving performance.\n' +
+        'Developed 4 new libraries for Ababil-NG using Angular, JavaScript, and Typescript while optimizing existing libraries.',
+      image: null,
+      color: '#28A745',
+      icon: 'pi pi-code'
+    },
+    {
+      designation: 'Junior Software Engineer',
+      company: 'Al-Khwarizmi Software Lab',
+      date: 'Dec 2020 – Apr 2022',
+      description: 'Developed REST API-based web applications using Spring Boot.\n' +
+        'Built the Shikkhon Android application, a mobile library app. 20k downloads in playstore',
+      image: null,
+      color: '#17A2B8',
+      icon: 'pi pi-mobile'
+    },
+  ];
+
+  severityMap = new Map();
   private socials: any;
   jsonData = jsonData;
   icons= new Map([['Java','fa-brands fa-java']]);
@@ -91,6 +127,7 @@ severityMap = new Map();
 
   onSocialClicked(selectedSocial: string) {
     this.social = this.socials[selectedSocial];
+    this.social.onClick();
   }
 
   copyValue() {
@@ -98,19 +135,20 @@ severityMap = new Map();
   }
 
   // Function to get a random severity
+  private severityIndex: number = Math.floor(Math.random() * this.severities.length);
   getRandomSeverity(s:any): any {
-    const randomIndex = Math.floor(Math.random() * this.severities.length);
+    this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex: this.severityIndex = 0 ;
     if(this.severityMap.get(s)){
       this.severityMap.get(s)
     } else {
-      this.severityMap.set(s,this.severities[randomIndex]) ;
+      this.severityMap.set(s,this.severities[this.severityIndex]) ;
           }
     return this.severityMap.get(s)
   }
 
 
   #document = inject(DOCUMENT);
-  isDarkMode: any;
+  isDarkMode = true;
   toggleDarkMode() {
     const linkElement = this.#document.getElementById(
       'app-theme',

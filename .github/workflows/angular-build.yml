@@ -3,38 +3,38 @@ name: Build and Deploy Angular Application to GitHub Pages
 on:
   push:
     branches:
-      - master  # Trigger workflow on pushes to the 'deploy' branch
+      - master
   pull_request:
     branches:
-      - master  # Trigger workflow on pull requests to the 'deploy' branch
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js environment
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20 # Use the version your project requires
+          node-version: 20
           cache: 'npm'
 
-      # Step 3: Install dependencies
+
       - name: Install Dependencies
         run: npm ci
 
-      # Step 4: Build Angular Application
+
       - name: Build Angular
         run: npm run build -c=production
 
-      # Step 5: Deploy to GitHub Pages
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/bodrulamin.github.io/browser # Ensure this matches your Angular build output directory
+          publish_dir: dist/bodrulamin.github.io/browser
