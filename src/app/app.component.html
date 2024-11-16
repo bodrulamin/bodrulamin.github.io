@@ -38,11 +38,12 @@
     <div class="text-center font-bold mt-4 text-600 text-3xl">Bodrul Amin</div>
     <div class="text-center text-400 text-1xl">Software Engineer</div>
     <!-- Social Media Contacts -->
-    <div class="flex flex-row gap-2 pt-2">
-      <div class="flex flex-column items-center">
+    <div class="flex flex-wrap gap-2 pt-2">
+      <div class="flex flex-row items-center">
         <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
                   (click)="onSocialClicked('linkedin')"></p-button>
       </div>
+
 
       <div class="flex flex-column items-center">
         <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
@@ -70,9 +71,9 @@
 
         <!-- Skills Section -->
         <p-card #skill header="Skills" class="w-full">
-          <div class="flex justify-content-center">
+          <div class="flex flex-wrap justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
-            <p-tag class="p-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
+            <p-tag styleClass="m-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
                    value="{{ s }}"/>
           </span>
 

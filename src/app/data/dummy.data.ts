@@ -9,9 +9,7 @@ export const jsonData = {
     "Website = https://bodrulamin.github.io",
   ],
   skill: [
-   "Java, Javascript, Typescript",
-   "Spring Boot, Hibernate, Angular, AngularJS",
-    "PostgreSQL, Oracle, Firestore"
+   "Java, Javascript, Typescript, Spring Boot, Hibernate, Angular, AngularJS, PostgreSQL, Oracle, Firestore"
   ],
   experience: [
     {
