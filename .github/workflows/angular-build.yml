@@ -1,12 +1,12 @@
-name: Build Angular Application
+name: Build and Deploy Angular Application to GitHub Pages
 
 on:
   push:
     branches:
-      - deploy
+      - master  # Trigger workflow on pushes to the 'deploy' branch
   pull_request:
     branches:
-      - deploy
+      - master  # Trigger workflow on pull requests to the 'deploy' branch
 
 jobs:
   build:
@@ -32,9 +32,9 @@ jobs:
       - name: Build Angular
         run: npm run build -c=production
 
-      # Step 5: Upload Build Artifacts (Optional)
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: angular-build
-          path: dist/ # Ensure this path matches your Angular build output directory
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/  # Ensure this matches your Angular build output directory
