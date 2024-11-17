@@ -89,7 +89,7 @@ export class AppComponent {
       },
       'github': {
         title: 'Github',
-        value: 'https://github.com/in/bodrulamin', canCopy: true,
+        value: 'https://github.com/bodrulamin', canCopy: true,
         onClick: () => {
           window.open(this.social.value);
         }
