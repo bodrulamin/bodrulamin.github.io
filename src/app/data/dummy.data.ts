@@ -1,5 +1,5 @@
 export const jsonData = {
-  aboutMe: "Software engineer with 3+ years of experience in Java, Spring Boot, and Angular. Skilled in optimizing\n" +
+  aboutMe: "Software engineer with 4 years of experience in Java, Spring Boot, and Angular. Skilled in optimizing\n" +
     "high-load systems, AWS cloud, and resolving customer issues. Experienced in on-call support and mentoring junior developers.\n" +
     "Focused on building scalable applications and improving system performance.",
   contact: [
