@@ -18,12 +18,13 @@ import {TagModule} from "primeng/tag";
 import {InputSwitchModule} from "primeng/inputswitch";
 import {FormsModule} from "@angular/forms";
 import {TimelineModule} from "primeng/timeline";
+import {CarouselModule} from "primeng/carousel";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule, CarouselModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -149,6 +150,29 @@ export class AppComponent {
 
   #document = inject(DOCUMENT);
   isDarkMode = true;
+  portfolioProjects = [
+    {
+      title: 'Project 1',
+      subtitle: 'Web Application',
+      description: 'A web application built using Angular and Spring Boot.',
+      image: 'https://via.placeholder.com/400x200',
+      link: 'https://github.com/your-project-link'
+    },
+    {
+      title: 'Project 2',
+      subtitle: 'Mobile App',
+      description: 'A mobile app developed with Flutter for seamless user experience.',
+      image: 'https://via.placeholder.com/400x200',
+      link: 'https://play.google.com/store/apps/details?id=your-app-link'
+    },
+    {
+      title: 'Project 3',
+      subtitle: 'E-commerce Platform',
+      description: 'An e-commerce platform for managing online stores.',
+      image: 'https://via.placeholder.com/400x200',
+      link: 'https://your-ecommerce-project-link.com'
+    }
+  ];
   toggleDarkMode() {
     const linkElement = this.#document.getElementById(
       'app-theme',
@@ -161,4 +185,20 @@ export class AppComponent {
       this.isDarkMode = false;
     }
   }
+  contactData = {
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  };
+
+  onSubmit(contactForm: any) {
+    if (contactForm.valid) {
+      console.log('Form Submitted:', this.contactData);
+      // You can integrate this data with a backend API to handle submissions
+      alert('Message sent successfully!');
+      contactForm.reset();
+    }
+  }
+
 }

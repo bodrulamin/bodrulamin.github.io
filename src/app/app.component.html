@@ -15,10 +15,9 @@
               severity="secondary" label="Experience"></p-button>
     <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
               severity="secondary" label="Portfolio"></p-button>
+    <p-button [text]="true" (onClick)="contactMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+              severity="secondary" label="Contact Me"></p-button>
 
-    <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="education" label="Education"></p-button>
-    <p-button [text]="true" [routerLink]="['/']" severity="secondary" fragment="contact-me"
-              label="Contact Me"></p-button>
 
     <p-button [text]="true" severity="secondary" icon="pi pi-moon" [label]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
               (click)="toggleDarkMode()"></p-button>
@@ -109,10 +108,112 @@
 
         </p-card>
         <p-card #portfolio header="Portfolio" class="w-full">
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-          </p>
+          <p-carousel
+            [value]="portfolioProjects"
+            [numVisible]="3"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="3000"
+            styleClass="custom-carousel h-full pb-3">
+            <ng-template pTemplate="item" let-project>
+              <div class="carousel-item p-2 h-full">
+                <p-card [header]="project.title" [subheader]="project.subtitle" styleClass="h-full">
+                  <div class="flex flex-column h-full">
+                    <img [src]="project.image" [alt]="project.title" class="w-full h-12rem object-cover border-round mb-3" />
+                    <p class="text-center">{{ project.description }}</p>
+                  </div>
+                  <ng-template pTemplate="footer">
+                    <div class="flex gap-3 mt-1">
+                      <p-button label="View Project" class="w-full" styleClass="w-full" />
+                    </div>
+                  </ng-template>
+                </p-card>
+              </div>
+            </ng-template>
+          </p-carousel>
         </p-card>
+        <p-card #contactMe header="Contact Me" class="w-full">
+          <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="p-fluid">
+            <div class="grid formgrid">
+              <!-- Name -->
+              <div class="field col-12 md:col-6">
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  pInputText
+                  placeholder="Your Name"
+                  required
+                  [(ngModel)]="contactData.name"
+                  name="name"
+                  #name="ngModel"
+                  class="p-inputtext">
+                <small *ngIf="name.invalid && name.touched" class="p-error">Name is required</small>
+              </div>
+
+              <!-- Email -->
+              <div class="field col-12 md:col-6">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  pInputText
+                  placeholder="Your Email"
+                  required
+                  [(ngModel)]="contactData.email"
+                  name="email"
+                  #email="ngModel"
+                  class="p-inputtext">
+                <small *ngIf="email.invalid && email.touched" class="p-error">Valid email is required</small>
+              </div>
+
+              <!-- Subject -->
+              <div class="field col-12">
+                <label for="subject">Subject</label>
+                <input
+                  id="subject"
+                  type="text"
+                  pInputText
+                  placeholder="Subject"
+                  required
+                  [(ngModel)]="contactData.subject"
+                  name="subject"
+                  #subject="ngModel"
+                  class="p-inputtext">
+                <small *ngIf="subject.invalid && subject.touched" class="p-error">Subject is required</small>
+              </div>
+
+              <!-- Message -->
+              <div class="field col-12">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  pInputTextarea
+                  placeholder="Your Message"
+                  required
+                  [(ngModel)]="contactData.message"
+                  name="message"
+                  #message="ngModel"
+                  class="p-inputtextarea">
+        </textarea>
+                <small *ngIf="message.invalid && message.touched" class="p-error">Message is required</small>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="col-12 text-center">
+                <p-button
+                  label="Send Message"
+                  icon="pi pi-send"
+                  type="submit"
+                  [disabled]="contactForm.invalid"
+                  class="p-button-rounded p-button-primary">
+                </p-button>
+              </div>
+            </div>
+          </form>
+        </p-card>
+
       </div>
     </div>
   </div>
