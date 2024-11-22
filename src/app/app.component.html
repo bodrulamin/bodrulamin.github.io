@@ -53,15 +53,14 @@
                 (click)="onSocialClicked('phone')"></p-button>
     </div>
 
-    <!-- About Me Section -->
   </div>
 
 </div>
-<div class="flex justify-content-center">
+<div class="flex justify-content-center line-height-3">
   <div class="col-10 md:col-8">
     <div class="flex flex-column gap-3">
       <p-card id="aboutMe" #aboutMe header="About Me" class="w-full">
-        <p>{{ jsonData.aboutMe }}</p>
+        <div>{{ jsonData.aboutMe }}</div>
       </p-card>
 
       <!-- Skills Section -->
