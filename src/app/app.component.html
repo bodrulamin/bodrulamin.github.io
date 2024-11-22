@@ -40,26 +40,26 @@
     <div class="text-center text-400 text-1xl">Software Engineer</div>
     <!-- Social Media Contacts -->
     <div class="sm:col-10 md:col-8 lg:col-8 flex flex-wrap justify-content-center align-items-center gap-2 pt-2">
-        <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
-                  (click)="onSocialClicked('linkedin')"></p-button>
+      <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
+                (click)="onSocialClicked('linkedin')"></p-button>
 
-        <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
-                  (click)="onSocialClicked('email')"></p-button>
+      <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
+                (click)="onSocialClicked('email')"></p-button>
 
-        <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary"
-                  (click)="onSocialClicked('github')"></p-button>
+      <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary"
+                (click)="onSocialClicked('github')"></p-button>
 
-        <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success"
-                  (click)="onSocialClicked('phone')"></p-button>
+      <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success"
+                (click)="onSocialClicked('phone')"></p-button>
     </div>
 
     <!-- About Me Section -->
   </div>
 
 </div>
-
 <div class="flex justify-content-center">
-  <div class="sm:col-10 md:col-8 lg:col-8">
+
+  <div class="col-10 md:col-8">
     <div class="flex flex-column gap-3">
 
       <p-card #aboutMe header="About Me" class="w-full">
@@ -100,9 +100,9 @@
 
 
           </ng-template>
-            <ng-template let-event>
+          <ng-template let-event>
 
-            </ng-template>
+          </ng-template>
 
         </p-timeline>
 
@@ -121,12 +121,12 @@
             <div class="carousel-item p-2 h-full">
               <p-card [header]="project.title" [subheader]="project.subtitle" styleClass="h-full">
                 <div class="flex flex-column h-full">
-                  <img [src]="project.image" [alt]="project.title" class="w-full h-12rem object-cover border-round mb-3" />
+                  <img [src]="project.image" [alt]="project.title" class="w-full h-12rem object-cover border-round mb-3"/>
                   <p class="text-center">{{ project.description }}</p>
                 </div>
                 <ng-template pTemplate="footer">
                   <div class="flex gap-3 mt-1">
-                    <p-button label="View Project" class="w-full" styleClass="w-full" />
+                    <p-button label="View Project" class="w-full" styleClass="w-full"/>
                   </div>
                 </ng-template>
               </p-card>
@@ -218,6 +218,4 @@
 
     </div>
   </div>
-
 </div>
-
