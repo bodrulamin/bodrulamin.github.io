@@ -1,10 +1,10 @@
 <p-toolbar>
   <!-- Start Group -->
-  <div class="p-toolbar-group-start">
+  <div class="p-toolbar-group-start flex flex-grow-1">
     <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin"></p-button>
   </div>
   <!-- End Group for Desktop -->
-  <div class="p-toolbar-group-end hidden md:flex flex-wrap">
+  <div class="p-toolbar-group-end hidden md:flex flex-wrap flex-grow-0">
     <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
               severity="secondary" label="About"></p-button>
     <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
@@ -20,7 +20,7 @@
   </div>
 
   <!-- Hamburger Menu for Mobile -->
-  <div class="p-toolbar-group-end flex flex-auto md:hidden justify-content-end">
+  <div class="p-toolbar-group-end flex flex-grow-0 md:hidden ">
     <p-button icon="pi pi-bars" (click)="menu.toggle($event)" styleClass="p-button-rounded"></p-button>
   </div>
 
@@ -85,22 +85,25 @@
         <p-timeline [value]="events">
           <ng-template pTemplate="marker" let-event>
         <span
-          class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1"
+          class="flex my-4 w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1"
           [style]="{ 'background-color': event.color }">
             <i [class]="event.icon"></i>
         </span>
           </ng-template>
-          <ng-template class="pt-3" pTemplate="content" let-event>
-            <div class="p-3"></div>
-            <small class="p-text-secondary">{{ event.date }}</small>
-            <ul>
-              <li *ngFor="let line of event.description.split('\n')">{{ line }}</li>
-            </ul>
-          </ng-template>
-          <ng-template pTemplate="opposite" let-event>
-            <p-card class="px-2" [header]="event.designation" [subheader]="event.company">
+          <ng-template pTemplate="content" let-event>
+            <p-card styleClass="p-2 shadow-none border-none" [header]="event.designation" [subheader]="event.company">
+              <small class="p-text-secondary">{{ event.date }}</small>
+              <ul>
+                <li *ngFor="let line of event.description.split('\n')">{{ line }}</li>
+              </ul>
             </p-card>
+
+
           </ng-template>
+            <ng-template let-event>
+
+            </ng-template>
+
         </p-timeline>
 
 
