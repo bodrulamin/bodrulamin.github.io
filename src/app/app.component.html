@@ -58,16 +58,14 @@
 
 </div>
 <div class="flex justify-content-center">
-
   <div class="col-10 md:col-8">
     <div class="flex flex-column gap-3">
-
-      <p-card #aboutMe header="About Me" class="w-full">
+      <p-card id="aboutMe" #aboutMe header="About Me" class="w-full">
         <p>{{ jsonData.aboutMe }}</p>
       </p-card>
 
       <!-- Skills Section -->
-      <p-card #skill header="Skills" class="w-full">
+      <p-card id="skill" #skill header="Skills" class="w-full">
         <div class="flex flex-wrap justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
             <p-tag styleClass="m-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
@@ -80,7 +78,7 @@
       </p-card>
 
       <!-- Portfolio Section -->
-      <p-card #experience header="Experience" class="w-full">
+      <p-card id="experience" #experience header="Experience" class="w-full">
 
         <p-timeline [value]="events">
           <ng-template pTemplate="marker" let-event>
@@ -108,7 +106,7 @@
 
 
       </p-card>
-      <p-card #portfolio header="Portfolio" class="w-full">
+      <p-card id="portfolio" #portfolio header="Portfolio" class="w-full">
         <p-carousel
           [value]="portfolioProjects"
           [numVisible]="3"
@@ -134,7 +132,7 @@
           </ng-template>
         </p-carousel>
       </p-card>
-      <p-card #contactMe header="Contact Me" class="w-full">
+      <p-card id="contactMe" #contactMe header="Contact Me" class="w-full">
         <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="p-fluid">
           <div class="grid formgrid">
             <!-- Name -->
