@@ -129,4 +129,5 @@ export class AppComponent {
     }
   }
 
+  protected readonly window = window;
 }

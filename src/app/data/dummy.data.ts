@@ -66,26 +66,35 @@ export const jsonData = {
 
   portfolioProjects: [
     {
-      title: 'Project 1',
+      title: 'CBXAM',
       subtitle: 'Web Application',
-      description: 'A web application built using Angular and Spring Boot.',
-      image: 'https://via.placeholder.com/400x200',
-      link: 'https://github.com/your-project-link'
+      description: 'Developed a comprehensive exam management software for both descriptive and MCQ-based exams, with features for\n' +
+        'examiner assessment and detailed evaluation.',
+      image: '/cbxam.png',
+      link: 'https://cbxam.com'
     },
     {
-      title: 'Project 2',
+      title: 'Shikkhon',
       subtitle: 'Mobile App',
-      description: 'A mobile app developed with Flutter for seamless user experience.',
-      image: 'https://via.placeholder.com/400x200',
-      link: 'https://play.google.com/store/apps/details?id=your-app-link'
+      description: 'A mobile library with 32k downloads on the Google Play Store.',
+      image: 'https://play-lh.googleusercontent.com/lflNnYhYvsx-1KpjH6sOKGbN_jsUDgIj5aHdmGRC8bdJLazJwKpmYJ1ZJ4AsuosmNQ=w240-h480-rw',
+      link: 'https://play.google.com/store/apps/details?id=bodrulamin.shikkhon'
     },
     {
-      title: 'Project 3',
-      subtitle: 'E-commerce Platform',
-      description: 'An e-commerce platform for managing online stores.',
-      image: 'https://via.placeholder.com/400x200',
-      link: 'https://your-ecommerce-project-link.com'
+      title: 'Shongothon',
+      subtitle: 'Web & Mobile App',
+      description: 'Organization management app.',
+      image: '/shongothon.png',
+      link: 'https://s.alkhwarizmilab.com'
+    },
+    {
+      title: 'Citizen Issue Solver',
+      subtitle: 'Web & Mobile App',
+      description: 'Instance Communication between emergency Service provider and Citizen made easy.',
+      image: 'https://bodrulamin.github.io/Citizen-Issue-Solver/assets/img/hero-img.png',
+      link: 'https://bodrulamin.github.io/Citizen-Issue-Solver/index.html'
     }
+
   ],
 
   cirtification: [

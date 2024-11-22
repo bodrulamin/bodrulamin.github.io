@@ -107,22 +107,26 @@
       </p-card>
       <p-card id="portfolio" #portfolio header="Portfolio" class="w-full">
         <p-carousel [value]="jsonData.portfolioProjects" [numVisible]="3" [numScroll]="1" [circular]="true"
-          [autoplayInterval]="3000" [responsiveOptions]="portfolioResponsiveOptions"
+          [autoplayInterval]="0" [responsiveOptions]="portfolioResponsiveOptions"
           styleClass="custom-carousel h-full pb-3">
           <ng-template pTemplate="item" let-project>
             <div class="carousel-item p-2 h-full">
-              <p-card [header]="project.title" [subheader]="project.subtitle" styleClass="h-full">
-                <div class="flex flex-column h-full">
-                  <img [src]="project.image" [alt]="project.title"
-                    class="w-full h-12rem object-cover border-round mb-3" />
-                  <p class="text-center">{{ project.description }}</p>
-                </div>
+              <p-card [header]="project.title"  [subheader]="project.subtitle" [style]="{ width: '330px',  }">
+                <ng-template pTemplate="header">
+                  <div class="h-12rem w-full">
+                    <img *ngIf="project.image" alt="Card" class="w-full h-full" src="{{project.image}}" />
+                  </div>
+                </ng-template>
+                <p class="h-8rem">
+                {{ project.description }}
+              </p>
                 <ng-template pTemplate="footer">
                   <div class="flex gap-3 mt-1">
-                    <p-button label="View Project" class="w-full" styleClass="w-full" />
+                    <p-button (onClick)="window.open(project.link)" label="View Project" severity="secondary" class="w-full" styleClass="w-full" />
                   </div>
                 </ng-template>
               </p-card>
+
             </div>
           </ng-template>
         </p-carousel>
