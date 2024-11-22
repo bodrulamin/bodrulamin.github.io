@@ -41,16 +41,16 @@
     <!-- Social Media Contacts -->
     <div class="sm:col-10 md:col-8 lg:col-8 flex flex-wrap justify-content-center align-items-center gap-2 pt-2">
       <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
-                (click)="onSocialClicked('linkedin')"></p-button>
+                (click)="onSocialClicked(jsonData.socials.linkedin)"></p-button>
 
       <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
-                (click)="onSocialClicked('email')"></p-button>
+                (click)="onSocialClicked(jsonData.socials.email)"></p-button>
 
       <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary"
-                (click)="onSocialClicked('github')"></p-button>
+                (click)="onSocialClicked(jsonData.socials.github)"></p-button>
 
       <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success"
-                (click)="onSocialClicked('phone')"></p-button>
+                (click)="onSocialClicked(jsonData.socials.phone)"></p-button>
     </div>
 
   </div>
@@ -79,7 +79,7 @@
       <!-- Portfolio Section -->
       <p-card id="experience" #experience header="Experience" class="w-full">
 
-        <p-timeline [value]="events">
+        <p-timeline [value]="jsonData.experience">
           <ng-template pTemplate="marker" let-event>
         <span
           class="flex my-4 w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1"
@@ -107,7 +107,7 @@
       </p-card>
       <p-card id="portfolio" #portfolio header="Portfolio" class="w-full">
         <p-carousel
-          [value]="portfolioProjects"
+          [value]="jsonData.portfolioProjects"
           [numVisible]="3"
           [numScroll]="1"
           [circular]="true"
