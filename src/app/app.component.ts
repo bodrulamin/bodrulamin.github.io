@@ -19,17 +19,20 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import {FormsModule} from "@angular/forms";
 import {TimelineModule} from "primeng/timeline";
 import {CarouselModule} from "primeng/carousel";
+import {MenuModule} from "primeng/menu";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule, CarouselModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule, CarouselModule, MenuModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'bodrulamin';
+  isDarkMode = true;
+
   social = {
     title: '',
     value: '', canCopy: true,
@@ -72,7 +75,21 @@ export class AppComponent {
       icon: 'pi pi-mobile'
     },
   ];
+  menuItems = [
+    { label: 'About', command: () => this.scrollToSection('aboutMe') },
+    { label: 'Skills', command: () => this.scrollToSection('skill') },
+    { label: 'Experience', command: () => this.scrollToSection('experience') },
+    { label: 'Portfolio', command: () => this.scrollToSection('portfolio') },
+    { label: 'Contact Me', command: () => this.scrollToSection('contactMe') },
+    { label: this.isDarkMode ? 'Light Mode' : 'Dark Mode', icon: 'pi pi-moon', command: () => this.toggleDarkMode() },
+  ];
 
+  scrollToSection(sectionId: string): void {
+    const section = (this as any)[sectionId]?.getBlockableElement();
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
   severityMap = new Map();
   private socials: any;
   jsonData = jsonData;
@@ -149,7 +166,6 @@ export class AppComponent {
 
 
   #document = inject(DOCUMENT);
-  isDarkMode = true;
   portfolioProjects = [
     {
       title: 'Project 1',
@@ -191,6 +207,23 @@ export class AppComponent {
     subject: '',
     message: ''
   };
+  portfolioResponsiveOptions = [
+    {
+      breakpoint: '1024px', // For devices with screen width <= 1024px
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '768px', // For devices with screen width <= 768px
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '560px', // For devices with screen width <= 560px
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 
   onSubmit(contactForm: any) {
     if (contactForm.valid) {

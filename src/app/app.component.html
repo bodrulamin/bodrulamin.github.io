@@ -1,12 +1,10 @@
 <p-toolbar>
+  <!-- Start Group -->
   <div class="p-toolbar-group-start">
-    <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin"/>
+    <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin"></p-button>
   </div>
-  <div class="p-toolbar-group-center">
-  </div>
-
-
-  <div class="p-toolbar-group-end flex flex-wrap">
+  <!-- End Group for Desktop -->
+  <div class="p-toolbar-group-end hidden md:flex flex-wrap">
     <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
               severity="secondary" label="About"></p-button>
     <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
@@ -17,16 +15,20 @@
               severity="secondary" label="Portfolio"></p-button>
     <p-button [text]="true" (onClick)="contactMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
               severity="secondary" label="Contact Me"></p-button>
-
-
     <p-button [text]="true" severity="secondary" icon="pi pi-moon" [label]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
               (click)="toggleDarkMode()"></p-button>
-
   </div>
-</p-toolbar>
 
+  <!-- Hamburger Menu for Mobile -->
+  <div class="p-toolbar-group-end flex flex-auto md:hidden justify-content-end">
+    <p-button icon="pi pi-bars" (click)="menu.toggle($event)" styleClass="p-button-rounded"></p-button>
+  </div>
+
+  <!-- Menu for Mobile -->
+  <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
+</p-toolbar>
 <div class="w-full mt-5">
-  <div class="flex flex-column align-items-center gap-2">
+  <div class="flex flex-column align-items-center gap-2 justify-content-center">
     <!-- Profile Picture -->
     <div class="w-7rem h-7rem border-circle overflow-hidden shadow-8">
       <img src="/photo.jpeg" class="w-full h-full object-cover"
@@ -37,185 +39,182 @@
     <div class="text-center font-bold mt-4 text-600 text-3xl">Bodrul Amin</div>
     <div class="text-center text-400 text-1xl">Software Engineer</div>
     <!-- Social Media Contacts -->
-    <div class="flex flex-wrap gap-2 pt-2">
-      <div class="flex flex-row items-center">
+    <div class="sm:col-10 md:col-8 lg:col-8 flex flex-wrap justify-content-center align-items-center gap-2 pt-2">
         <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
                   (click)="onSocialClicked('linkedin')"></p-button>
-      </div>
 
-
-      <div class="flex flex-column items-center">
         <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
                   (click)="onSocialClicked('email')"></p-button>
-      </div>
 
-      <div class="flex flex-column items-center">
         <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary"
                   (click)="onSocialClicked('github')"></p-button>
-      </div>
 
-      <div class="flex flex-column items-center">
         <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success"
                   (click)="onSocialClicked('phone')"></p-button>
-      </div>
     </div>
 
     <!-- About Me Section -->
-    <div class="sm:col-11 md:col-10 lg:col-10">
-      <div class="flex flex-column gap-3">
+  </div>
 
-        <p-card #aboutMe header="About Me" class="w-full">
-          <p>{{ jsonData.aboutMe }}</p>
-        </p-card>
+</div>
 
-        <!-- Skills Section -->
-        <p-card #skill header="Skills" class="w-full">
-          <div class="flex flex-wrap justify-content-center">
+<div class="flex justify-content-center">
+  <div class="sm:col-10 md:col-8 lg:col-8">
+    <div class="flex flex-column gap-3">
+
+      <p-card #aboutMe header="About Me" class="w-full">
+        <p>{{ jsonData.aboutMe }}</p>
+      </p-card>
+
+      <!-- Skills Section -->
+      <p-card #skill header="Skills" class="w-full">
+        <div class="flex flex-wrap justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
             <p-tag styleClass="m-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
                    value="{{ s }}"/>
           </span>
 
 
-          </div>
+        </div>
 
-        </p-card>
+      </p-card>
 
-        <!-- Portfolio Section -->
-        <p-card #experience header="Experience" class="w-full">
+      <!-- Portfolio Section -->
+      <p-card #experience header="Experience" class="w-full">
 
-          <p-timeline [value]="events">
-            <ng-template pTemplate="marker" let-event>
+        <p-timeline [value]="events">
+          <ng-template pTemplate="marker" let-event>
         <span
           class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1"
           [style]="{ 'background-color': event.color }">
             <i [class]="event.icon"></i>
         </span>
-            </ng-template>
-            <ng-template class="pt-3" pTemplate="content" let-event>
-              <div class="p-3"></div>
-              <small class="p-text-secondary">{{ event.date }}</small>
-              <ul>
-                <li *ngFor="let line of event.description.split('\n')">{{ line }}</li>
-              </ul>
-            </ng-template>
-            <ng-template pTemplate="opposite" let-event>
-              <p-card class="px-2" [header]="event.designation" [subheader]="event.company">
-              </p-card>
-            </ng-template>
-          </p-timeline>
+          </ng-template>
+          <ng-template class="pt-3" pTemplate="content" let-event>
+            <div class="p-3"></div>
+            <small class="p-text-secondary">{{ event.date }}</small>
+            <ul>
+              <li *ngFor="let line of event.description.split('\n')">{{ line }}</li>
+            </ul>
+          </ng-template>
+          <ng-template pTemplate="opposite" let-event>
+            <p-card class="px-2" [header]="event.designation" [subheader]="event.company">
+            </p-card>
+          </ng-template>
+        </p-timeline>
 
 
-        </p-card>
-        <p-card #portfolio header="Portfolio" class="w-full">
-          <p-carousel
-            [value]="portfolioProjects"
-            [numVisible]="3"
-            [numScroll]="1"
-            [circular]="true"
-            [autoplayInterval]="3000"
-            styleClass="custom-carousel h-full pb-3">
-            <ng-template pTemplate="item" let-project>
-              <div class="carousel-item p-2 h-full">
-                <p-card [header]="project.title" [subheader]="project.subtitle" styleClass="h-full">
-                  <div class="flex flex-column h-full">
-                    <img [src]="project.image" [alt]="project.title" class="w-full h-12rem object-cover border-round mb-3" />
-                    <p class="text-center">{{ project.description }}</p>
+      </p-card>
+      <p-card #portfolio header="Portfolio" class="w-full">
+        <p-carousel
+          [value]="portfolioProjects"
+          [numVisible]="3"
+          [numScroll]="1"
+          [circular]="true"
+          [autoplayInterval]="3000"
+          [responsiveOptions]="portfolioResponsiveOptions"
+          styleClass="custom-carousel h-full pb-3">
+          <ng-template pTemplate="item" let-project>
+            <div class="carousel-item p-2 h-full">
+              <p-card [header]="project.title" [subheader]="project.subtitle" styleClass="h-full">
+                <div class="flex flex-column h-full">
+                  <img [src]="project.image" [alt]="project.title" class="w-full h-12rem object-cover border-round mb-3" />
+                  <p class="text-center">{{ project.description }}</p>
+                </div>
+                <ng-template pTemplate="footer">
+                  <div class="flex gap-3 mt-1">
+                    <p-button label="View Project" class="w-full" styleClass="w-full" />
                   </div>
-                  <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                      <p-button label="View Project" class="w-full" styleClass="w-full" />
-                    </div>
-                  </ng-template>
-                </p-card>
-              </div>
-            </ng-template>
-          </p-carousel>
-        </p-card>
-        <p-card #contactMe header="Contact Me" class="w-full">
-          <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="p-fluid">
-            <div class="grid formgrid">
-              <!-- Name -->
-              <div class="field col-12 md:col-6">
-                <label for="name">Name</label>
-                <input
-                  id="name"
-                  type="text"
-                  pInputText
-                  placeholder="Your Name"
-                  required
-                  [(ngModel)]="contactData.name"
-                  name="name"
-                  #name="ngModel"
-                  class="p-inputtext">
-                <small *ngIf="name.invalid && name.touched" class="p-error">Name is required</small>
-              </div>
-
-              <!-- Email -->
-              <div class="field col-12 md:col-6">
-                <label for="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  pInputText
-                  placeholder="Your Email"
-                  required
-                  [(ngModel)]="contactData.email"
-                  name="email"
-                  #email="ngModel"
-                  class="p-inputtext">
-                <small *ngIf="email.invalid && email.touched" class="p-error">Valid email is required</small>
-              </div>
-
-              <!-- Subject -->
-              <div class="field col-12">
-                <label for="subject">Subject</label>
-                <input
-                  id="subject"
-                  type="text"
-                  pInputText
-                  placeholder="Subject"
-                  required
-                  [(ngModel)]="contactData.subject"
-                  name="subject"
-                  #subject="ngModel"
-                  class="p-inputtext">
-                <small *ngIf="subject.invalid && subject.touched" class="p-error">Subject is required</small>
-              </div>
-
-              <!-- Message -->
-              <div class="field col-12">
-                <label for="message">Message</label>
-                <textarea
-                  id="message"
-                  rows="5"
-                  pInputTextarea
-                  placeholder="Your Message"
-                  required
-                  [(ngModel)]="contactData.message"
-                  name="message"
-                  #message="ngModel"
-                  class="p-inputtextarea">
-        </textarea>
-                <small *ngIf="message.invalid && message.touched" class="p-error">Message is required</small>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="col-12 text-center">
-                <p-button
-                  label="Send Message"
-                  icon="pi pi-send"
-                  type="submit"
-                  [disabled]="contactForm.invalid"
-                  class="p-button-rounded p-button-primary">
-                </p-button>
-              </div>
+                </ng-template>
+              </p-card>
             </div>
-          </form>
-        </p-card>
+          </ng-template>
+        </p-carousel>
+      </p-card>
+      <p-card #contactMe header="Contact Me" class="w-full">
+        <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="p-fluid">
+          <div class="grid formgrid">
+            <!-- Name -->
+            <div class="field col-12 md:col-6">
+              <label for="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                pInputText
+                placeholder="Your Name"
+                required
+                [(ngModel)]="contactData.name"
+                name="name"
+                #name="ngModel"
+                class="p-inputtext">
+              <small *ngIf="name.invalid && name.touched" class="p-error">Name is required</small>
+            </div>
 
-      </div>
+            <!-- Email -->
+            <div class="field col-12 md:col-6">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                pInputText
+                placeholder="Your Email"
+                required
+                [(ngModel)]="contactData.email"
+                name="email"
+                #email="ngModel"
+                class="p-inputtext">
+              <small *ngIf="email.invalid && email.touched" class="p-error">Valid email is required</small>
+            </div>
+
+            <!-- Subject -->
+            <div class="field col-12">
+              <label for="subject">Subject</label>
+              <input
+                id="subject"
+                type="text"
+                pInputText
+                placeholder="Subject"
+                required
+                [(ngModel)]="contactData.subject"
+                name="subject"
+                #subject="ngModel"
+                class="p-inputtext">
+              <small *ngIf="subject.invalid && subject.touched" class="p-error">Subject is required</small>
+            </div>
+
+            <!-- Message -->
+            <div class="field col-12">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                rows="5"
+                pInputTextarea
+                placeholder="Your Message"
+                required
+                [(ngModel)]="contactData.message"
+                name="message"
+                #message="ngModel"
+                class="p-inputtextarea">
+        </textarea>
+              <small *ngIf="message.invalid && message.touched" class="p-error">Message is required</small>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-12 text-center">
+              <p-button
+                label="Send Message"
+                icon="pi pi-send"
+                type="submit"
+                [disabled]="contactForm.invalid"
+                class="p-button-rounded p-button-primary">
+              </p-button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+
     </div>
   </div>
+
 </div>
 
