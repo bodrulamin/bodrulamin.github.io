@@ -89,10 +89,10 @@
         </span>
           </ng-template>
           <ng-template pTemplate="content" let-event>
-            <p-card styleClass="p-2 shadow-none border-none" [header]="event.designation" [subheader]="event.company">
+            <p-card styleClass="shadow-none border-none" [header]="event.designation" [subheader]="event.company">
               <small class="p-text-secondary">{{ event.date }}</small>
-              <ul>
-                <li *ngFor="let line of event.description.split('\n')">{{ line }}</li>
+              <ul style="margin-left:-20px">
+                <li style="padding-top:5px;padding-bottom:5px" *ngFor="let line of event.description.split('\n')">{{ line }}</li>
               </ul>
             </p-card>
 
