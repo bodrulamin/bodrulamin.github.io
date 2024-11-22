@@ -1,25 +1,25 @@
-import {Component, inject, ViewChild} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {Button} from "primeng/button";
-import {ToolbarModule} from "primeng/toolbar";
-import {SplitButtonModule} from "primeng/splitbutton";
-import {InputTextModule} from "primeng/inputtext";
-import {OverlayPanelModule} from "primeng/overlaypanel";
-import {InputGroupModule} from "primeng/inputgroup";
-import {InputGroupAddonModule} from "primeng/inputgroupaddon";
-import {ChipsModule} from "primeng/chips";
-import {DOCUMENT, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
-import {PanelModule} from "primeng/panel";
-import {DataService} from "./data/data.service";
-import {CardModule} from "primeng/card";
-import {ChipModule} from "primeng/chip";
-import {TagModule} from "primeng/tag";
-import {InputSwitchModule} from "primeng/inputswitch";
-import {FormsModule} from "@angular/forms";
-import {TimelineModule} from "primeng/timeline";
-import {CarouselModule} from "primeng/carousel";
-import {MenuModule} from "primeng/menu";
-import {jsonData} from "./data/dummy.data";
+import { Component, inject, ViewChild } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Button } from "primeng/button";
+import { ToolbarModule } from "primeng/toolbar";
+import { SplitButtonModule } from "primeng/splitbutton";
+import { InputTextModule } from "primeng/inputtext";
+import { OverlayPanelModule } from "primeng/overlaypanel";
+import { InputGroupModule } from "primeng/inputgroup";
+import { InputGroupAddonModule } from "primeng/inputgroupaddon";
+import { ChipsModule } from "primeng/chips";
+import { DOCUMENT, KeyValuePipe, NgForOf, NgIf } from "@angular/common";
+import { PanelModule } from "primeng/panel";
+import { DataService } from "./data/data.service";
+import { CardModule } from "primeng/card";
+import { ChipModule } from "primeng/chip";
+import { TagModule } from "primeng/tag";
+import { InputSwitchModule } from "primeng/inputswitch";
+import { FormsModule } from "@angular/forms";
+import { TimelineModule } from "primeng/timeline";
+import { CarouselModule } from "primeng/carousel";
+import { MenuModule } from "primeng/menu";
+import { jsonData } from "./data/dummy.data";
 
 
 @Component({
@@ -34,19 +34,13 @@ export class AppComponent {
   severities = ["success", "secondary", "info", "warning", "danger", "contrast"];
   menuItems: any[] = [];
   severityMap = new Map();
-  jsonData= jsonData;
+  jsonData = jsonData;
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
 
   constructor(private dataService: DataService) {
     this.dataService.getJsonData().subscribe({
-        next: data => {
-          this.jsonData = data;
-        },
-        error: err => {
-        },
-        complete: () => {
-        }
-      }
+      next: data => this.jsonData = data,
+    }
     );
     this.updateMenu();
   }
@@ -54,7 +48,6 @@ export class AppComponent {
   onSocialClicked(selectedSocial: any) {
     window.open(selectedSocial.prefix + selectedSocial.value);
   }
-
 
   getRandomSeverity(s: any): any {
     this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex : this.severityIndex = 0;
@@ -67,15 +60,14 @@ export class AppComponent {
   }
 
   toggleDarkMode() {
-    const linkElement = document.getElementById(
-      'app-theme',
-    ) as HTMLLinkElement;
-    if (linkElement.href.includes('light')) {
-      linkElement.href = 'theme-dark.css';
+    const link = document.getElementById('app-theme',) as HTMLLinkElement;
+
+    if (link.href.includes('light')) {
+      link.href = 'theme-dark.css';
       this.isDarkMode = true;
       this.updateMenu();
     } else {
-      linkElement.href = 'theme-light.css';
+      link.href = 'theme-light.css';
       this.isDarkMode = false;
       this.updateMenu();
     }
@@ -116,11 +108,11 @@ export class AppComponent {
 
   private updateMenu() {
     this.menuItems = [
-      {label: 'About', command: () => this.scrollToSection('aboutMe')},
-      {label: 'Skills', command: () => this.scrollToSection('skill')},
-      {label: 'Experience', command: () => this.scrollToSection('experience')},
-      {label: 'Portfolio', command: () => this.scrollToSection('portfolio')},
-      {label: 'Contact Me', command: () => this.scrollToSection('contactMe')},
+      { label: 'About', command: () => this.scrollToSection('aboutMe') },
+      { label: 'Skills', command: () => this.scrollToSection('skill') },
+      { label: 'Experience', command: () => this.scrollToSection('experience') },
+      { label: 'Portfolio', command: () => this.scrollToSection('portfolio') },
+      { label: 'Contact Me', command: () => this.scrollToSection('contactMe') },
       {
         label: this.isDarkMode ? 'Light Mode' : 'Dark Mode',
         id: 'theme',
@@ -133,7 +125,7 @@ export class AppComponent {
   scrollToSection(sectionId: string): void {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({behavior: 'smooth'});
+      section.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
