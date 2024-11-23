@@ -1,25 +1,25 @@
-import { Component, inject, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Button } from "primeng/button";
-import { ToolbarModule } from "primeng/toolbar";
-import { SplitButtonModule } from "primeng/splitbutton";
-import { InputTextModule } from "primeng/inputtext";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { InputGroupModule } from "primeng/inputgroup";
-import { InputGroupAddonModule } from "primeng/inputgroupaddon";
-import { ChipsModule } from "primeng/chips";
-import { DOCUMENT, KeyValuePipe, NgForOf, NgIf } from "@angular/common";
-import { PanelModule } from "primeng/panel";
-import { DataService } from "./data/data.service";
-import { CardModule } from "primeng/card";
-import { ChipModule } from "primeng/chip";
-import { TagModule } from "primeng/tag";
-import { InputSwitchModule } from "primeng/inputswitch";
-import { FormsModule } from "@angular/forms";
-import { TimelineModule } from "primeng/timeline";
-import { CarouselModule } from "primeng/carousel";
-import { MenuModule } from "primeng/menu";
-import { jsonData } from "./data/dummy.data";
+import {Component, inject, ViewChild} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {Button} from "primeng/button";
+import {ToolbarModule} from "primeng/toolbar";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {InputTextModule} from "primeng/inputtext";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {InputGroupModule} from "primeng/inputgroup";
+import {InputGroupAddonModule} from "primeng/inputgroupaddon";
+import {ChipsModule} from "primeng/chips";
+import {DOCUMENT, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
+import {PanelModule} from "primeng/panel";
+import {DataService} from "./data/data.service";
+import {CardModule} from "primeng/card";
+import {ChipModule} from "primeng/chip";
+import {TagModule} from "primeng/tag";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {FormsModule} from "@angular/forms";
+import {TimelineModule} from "primeng/timeline";
+import {CarouselModule} from "primeng/carousel";
+import {MenuModule} from "primeng/menu";
+import {jsonData} from "./data/dummy.data";
 
 
 @Component({
@@ -36,13 +36,12 @@ export class AppComponent {
   severityMap = new Map();
   jsonData = jsonData;
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
+  visitorCount: number = 0;
 
   constructor(private dataService: DataService) {
-    this.dataService.getJsonData().subscribe({
-      next: data => this.jsonData = data,
-    }
-    );
+    this.fetchData();
     this.updateMenu();
+    this.updateVisitorCount();
   }
 
   onSocialClicked(selectedSocial: any) {
@@ -108,11 +107,11 @@ export class AppComponent {
 
   private updateMenu() {
     this.menuItems = [
-      { label: 'About', command: () => this.scrollToSection('aboutMe') },
-      { label: 'Skills', command: () => this.scrollToSection('skill') },
-      { label: 'Experience', command: () => this.scrollToSection('experience') },
-      { label: 'Portfolio', command: () => this.scrollToSection('portfolio') },
-      { label: 'Contact Me', command: () => this.scrollToSection('contactMe') },
+      {label: 'About', command: () => this.scrollToSection('aboutMe')},
+      {label: 'Skills', command: () => this.scrollToSection('skill')},
+      {label: 'Experience', command: () => this.scrollToSection('experience')},
+      {label: 'Portfolio', command: () => this.scrollToSection('portfolio')},
+      {label: 'Contact Me', command: () => this.scrollToSection('contactMe')},
       {
         label: this.isDarkMode ? 'Light Mode' : 'Dark Mode',
         id: 'theme',
@@ -125,9 +124,23 @@ export class AppComponent {
   scrollToSection(sectionId: string): void {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({behavior: 'smooth'});
     }
   }
 
   protected readonly window = window;
+
+  private updateVisitorCount() {
+    this.dataService.visitorCount().subscribe({
+        next: data => this.visitorCount = data.value,
+      }
+    );
+  }
+
+  private fetchData() {
+    this.dataService.getJsonData().subscribe({
+        next: data => this.jsonData = data,
+      }
+    );
+  }
 }

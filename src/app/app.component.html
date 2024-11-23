@@ -107,7 +107,7 @@
       </p-card>
       <p-card id="portfolio" #portfolio header="Portfolio" class="w-full">
         <p-carousel [value]="jsonData.portfolioProjects" [numVisible]="3" [numScroll]="1" [circular]="true"
-          [autoplayInterval]="0" [responsiveOptions]="portfolioResponsiveOptions"
+          [autoplayInterval]="3000" [responsiveOptions]="portfolioResponsiveOptions"
           styleClass="custom-carousel h-full pb-3">
           <ng-template pTemplate="item" let-project>
             <div class="carousel-item p-2 h-full">
@@ -179,4 +179,8 @@
 
     </div>
   </div>
+</div>
+<div class="flex justify-content-center m-2 pb-5">
+  <img src="https://komarev.com/ghpvc/?username=bodrulamin&label=Visitor%20Count&color=0e75b6&style=flat" alt="bodrulamin" />
+
 </div>
