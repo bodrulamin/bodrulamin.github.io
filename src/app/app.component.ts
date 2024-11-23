@@ -20,7 +20,7 @@ import { TimelineModule } from "primeng/timeline";
 import { CarouselModule } from "primeng/carousel";
 import { MenuModule } from "primeng/menu";
 import { jsonData } from "./data/dummy.data";
-
+import { AnimateModule } from 'primeng/animate';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +36,7 @@ export class AppComponent {
   severityMap = new Map();
   jsonData = jsonData;
   cd=0;
+  enterClass = "flipright";
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
 
   constructor(private dataService: DataService) {
@@ -49,9 +50,10 @@ export class AppComponent {
   onSocialClicked(selectedSocial: any) {
     window.open(selectedSocial.prefix + selectedSocial.value);
   }
+
 get cardAnimation(): string {
   this.cd = this.cd + 100;
-  return 'fadeinright animation-duration-1000 '+'animation-delay-'+this.cd;
+  return 'animation-duration-1000 '+'animation-delay-'+this.cd;
 }
   getRandomSeverity(s: any): any {
     this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex : this.severityIndex = 0;

@@ -63,7 +63,7 @@
       </p-card>
 
       <!-- Skills Section -->
-      <p-card id="skill" #skill header="Skills"  [styleClass]="cardAnimation">
+      <p-card pAnimate id="skill" #skill header="Skills" enterClass='{{enterClass}}' [styleClass]="cardAnimation">
         <div class="flex flex-wrap justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
             <p-tag styleClass="m-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
