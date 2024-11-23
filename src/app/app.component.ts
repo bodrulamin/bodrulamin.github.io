@@ -51,7 +51,7 @@ export class AppComponent {
   }
 get cardAnimation(): string {
   this.cd = this.cd + 100;
-  return 'fadeindown animation-duration-1000 '+'animation-delay-'+this.cd;
+  return 'fadeinright animation-duration-1000 '+'animation-delay-'+this.cd;
 }
   getRandomSeverity(s: any): any {
     this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex : this.severityIndex = 0;
