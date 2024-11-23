@@ -1,26 +1,26 @@
-import {Component, inject, ViewChild} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {Button} from "primeng/button";
-import {ToolbarModule} from "primeng/toolbar";
-import {SplitButtonModule} from "primeng/splitbutton";
-import {InputTextModule} from "primeng/inputtext";
-import {OverlayPanelModule} from "primeng/overlaypanel";
-import {InputGroupModule} from "primeng/inputgroup";
-import {InputGroupAddonModule} from "primeng/inputgroupaddon";
-import {ChipsModule} from "primeng/chips";
-import {DOCUMENT, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
-import {PanelModule} from "primeng/panel";
-import {DataService} from "./data/data.service";
-import {CardModule} from "primeng/card";
-import {ChipModule} from "primeng/chip";
-import {TagModule} from "primeng/tag";
-import {InputSwitchModule} from "primeng/inputswitch";
-import {FormsModule} from "@angular/forms";
-import {TimelineModule} from "primeng/timeline";
-import {CarouselModule} from "primeng/carousel";
-import {MenuModule} from "primeng/menu";
-import {jsonData} from "./data/dummy.data";
-
+import { Component, inject, ViewChild } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Button } from "primeng/button";
+import { ToolbarModule } from "primeng/toolbar";
+import { SplitButtonModule } from "primeng/splitbutton";
+import { InputTextModule } from "primeng/inputtext";
+import { OverlayPanelModule } from "primeng/overlaypanel";
+import { InputGroupModule } from "primeng/inputgroup";
+import { InputGroupAddonModule } from "primeng/inputgroupaddon";
+import { ChipsModule } from "primeng/chips";
+import { DOCUMENT, KeyValuePipe, NgForOf, NgIf } from "@angular/common";
+import { PanelModule } from "primeng/panel";
+import { DataService } from "./data/data.service";
+import { CardModule } from "primeng/card";
+import { ChipModule } from "primeng/chip";
+import { TagModule } from "primeng/tag";
+import { InputSwitchModule } from "primeng/inputswitch";
+import { FormsModule } from "@angular/forms";
+import { TimelineModule } from "primeng/timeline";
+import { CarouselModule } from "primeng/carousel";
+import { MenuModule } from "primeng/menu";
+import { jsonData } from "./data/dummy.data";
+import { AnimateModule } from 'primeng/animate';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +35,8 @@ export class AppComponent {
   menuItems: any[] = [];
   severityMap = new Map();
   jsonData = jsonData;
+  cd=0;
+  enterClass = "flipright";
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
   visitorCount: number = 0;
 
@@ -48,6 +50,10 @@ export class AppComponent {
     window.open(selectedSocial.prefix + selectedSocial.value);
   }
 
+get cardAnimation(): string {
+  this.cd = this.cd + 100;
+  return 'animation-duration-1000 '+'animation-delay-'+this.cd;
+}
   getRandomSeverity(s: any): any {
     this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex : this.severityIndex = 0;
     if (this.severityMap.get(s)) {
