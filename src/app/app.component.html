@@ -63,7 +63,7 @@
       </p-card>
 
       <!-- Skills Section -->
-      <p-card id="skill" #skill header="Skills" class="w-full">
+      <p-card id="skill" #skill header="Skills" class="w-full fadeindown animation-duration-1000">
         <div class="flex flex-wrap justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
             <p-tag styleClass="m-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
@@ -76,7 +76,7 @@
       </p-card>
 
       <!-- Portfolio Section -->
-      <p-card id="experience" #experience header="Experience" class="w-full">
+      <p-card id="experience" #experience header="Experience" class="w-full fadeindown animation-duration-1000">
 
         <p-timeline [value]="jsonData.experience">
           <ng-template pTemplate="marker" let-event>
@@ -105,7 +105,7 @@
 
 
       </p-card>
-      <p-card id="portfolio" #portfolio header="Portfolio" class="w-full">
+      <p-card id="portfolio" #portfolio header="Portfolio" class="w-full fadeindown animation-duration-1000">
         <p-carousel [value]="jsonData.portfolioProjects" [numVisible]="3" [numScroll]="1" [circular]="true"
           [autoplayInterval]="0" [responsiveOptions]="portfolioResponsiveOptions"
           styleClass="custom-carousel h-full pb-3">
@@ -131,7 +131,7 @@
           </ng-template>
         </p-carousel>
       </p-card>
-      <p-card id="contactMe" #contactMe header="Contact Me" class="w-full">
+      <p-card id="contactMe" #contactMe header="Contact Me" class="w-full fadeindown animation-duration-1000">
         <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="p-fluid">
           <div class="grid formgrid">
             <!-- Name -->
