@@ -35,6 +35,7 @@ export class AppComponent {
   menuItems: any[] = [];
   severityMap = new Map();
   jsonData = jsonData;
+  cd=0;
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
 
   constructor(private dataService: DataService) {
@@ -48,7 +49,10 @@ export class AppComponent {
   onSocialClicked(selectedSocial: any) {
     window.open(selectedSocial.prefix + selectedSocial.value);
   }
-
+get cardAnimation(): string {
+  this.cd = this.cd + 100;
+  return 'fadeindown animation-duration-1000 '+'animation-delay-'+this.cd;
+}
   getRandomSeverity(s: any): any {
     this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex : this.severityIndex = 0;
     if (this.severityMap.get(s)) {
