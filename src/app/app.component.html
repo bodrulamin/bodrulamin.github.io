@@ -8,7 +8,7 @@
     <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
       severity="secondary" label="About"></p-button>
     <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
-      severity="danger" label="Skills"></p-button>
+      severity="secondary" label="Skills"></p-button>
     <p-button [text]="true" (onClick)="experience.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
       severity="secondary" label="Experience"></p-button>
     <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
@@ -39,35 +39,32 @@
     <div class="text-center text-400 text-1xl">Software Engineer</div>
     <!-- Social Media Contacts -->
     <div class="sm:col-10 md:col-8 lg:col-8 flex flex-wrap justify-content-center align-items-center gap-2 pt-2">
-      <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-linkedin-in" severity="info"
-        (click)="onSocialClicked(jsonData.socials.linkedin)"></p-button>
-
-      <p-button [text]="true" label="bodrulaminiu@gmail.com" icon="fa fa-envelope" severity="danger"
-        (click)="onSocialClicked(jsonData.socials.email)"></p-button>
-
-      <p-button [text]="true" label="bodrulamin" icon="fa-brands fa-github" severity="secondary"
-        (click)="onSocialClicked(jsonData.socials.github)"></p-button>
-
-      <p-button [text]="true" label="+8801725717136" icon="fa fa-phone" severity="success"
-        (click)="onSocialClicked(jsonData.socials.phone)"></p-button>
+      <p-button
+        @rotate
+        *ngFor="let social of jsonData.socials; let i = index"
+        [text]="social.text"
+        [label]="social.label"
+        [icon]="social.icon"
+        severity="{{social.severity}}"
+        (click)="onSocialClicked(social.link)" class=""
+      ></p-button>
     </div>
-
   </div>
 
 </div>
 <div class="flex justify-content-center line-height-3">
   <div class="col-12 lg:col-8 md:col-10">
     <div class="flex flex-column gap-3">
-      <p-card id="aboutMe" #aboutMe header="About Me"  [styleClass]="cardAnimation">
+      <p-card id="aboutMe" #aboutMe header="About Me" pAnimateOnScroll [enterClass]='enterClass' class="animation-duration-1000 animation-ease-out">
         <div>{{ jsonData.aboutMe }}</div>
       </p-card>
 
       <!-- Skills Section -->
-      <p-card pAnimate id="skill" #skill header="Skills" enterClass='{{enterClass}}' [styleClass]="cardAnimation">
+      <p-card id="skill" #skill header="Skills"  pAnimateOnScroll [enterClass]='enterClass' class="animation-duration-1000 animation-ease-out">
         <div class="flex flex-wrap justify-content-center">
           <span *ngFor="let skill of jsonData?.skill">
-            <p-tag styleClass="m-1" [severity]="getRandomSeverity(s)" *ngFor="let s of skill.split(',')"
-              value="{{ s }}" />
+            <p-tag styleClass="m-1" [severity]="getSeverity(s)" *ngFor="let s of skill.split(',')"
+                   value="{{ s }}" />
           </span>
 
 
@@ -76,7 +73,7 @@
       </p-card>
 
       <!-- Portfolio Section -->
-      <p-card id="experience" #experience header="Experience"  [styleClass]="cardAnimation">
+      <p-card id="experience" #experience header="Experience" pAnimateOnScroll [enterClass]='enterClass' class="animation-duration-1000 animation-ease-out">
 
         <p-timeline [value]="jsonData.experience">
           <ng-template pTemplate="marker" let-event>
@@ -105,7 +102,7 @@
 
 
       </p-card>
-      <p-card id="portfolio" #portfolio header="Portfolio"  [styleClass]="cardAnimation">
+      <p-card id="portfolio" #portfolio header="Portfolio" pAnimateOnScroll [enterClass]='enterClass' class="animation-duration-1000 animation-ease-out">
         <p-carousel [value]="jsonData.portfolioProjects" [numVisible]="3" [numScroll]="1" [circular]="true"
           [autoplayInterval]="3000" [responsiveOptions]="portfolioResponsiveOptions"
           styleClass="custom-carousel h-full pb-3">
@@ -131,7 +128,7 @@
           </ng-template>
         </p-carousel>
       </p-card>
-      <p-card id="contactMe" #contactMe header="Contact Me"  [styleClass]="cardAnimation">
+      <p-card id="contactMe" #contactMe header="Contact Me"  pAnimateOnScroll [enterClass]='enterClass' class="animation-duration-1000 animation-ease-out">
         <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="p-fluid">
           <div class="grid formgrid">
             <!-- Name -->

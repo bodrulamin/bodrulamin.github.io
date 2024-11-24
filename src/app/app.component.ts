@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import {Component, ElementRef, inject, OnInit, viewChild, ViewChild} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Button } from "primeng/button";
 import { ToolbarModule } from "primeng/toolbar";
@@ -21,40 +21,122 @@ import { CarouselModule } from "primeng/carousel";
 import { MenuModule } from "primeng/menu";
 import { jsonData } from "./data/dummy.data";
 import { AnimateModule } from 'primeng/animate';
+import {AnimateOnScrollModule} from "primeng/animateonscroll";
+import {animate, keyframes, style, transition, trigger} from "@angular/animations";
+type SocialPlatform = 'linkedin' | 'github' | 'email' | 'phone';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule, CarouselModule, MenuModule],
+  imports: [RouterOutlet, Button, ToolbarModule, SplitButtonModule, InputTextModule, OverlayPanelModule, InputGroupModule, InputGroupAddonModule, ChipsModule, NgIf, PanelModule, CardModule, NgForOf, KeyValuePipe, ChipModule, TagModule, InputSwitchModule, FormsModule, TimelineModule, CarouselModule, MenuModule, AnimateModule, AnimateOnScrollModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('1000ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('1000ms ease-out', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-in', style({ transform: 'translateX(-100%)' }))
+      ])
+    ]),
+    trigger('scaleUp', [
+      transition(':enter', [
+        style({ transform: 'scale(0)' }),
+        animate('1000ms ease-in', style({ transform: 'scale(1)' }))
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-out', style({ transform: 'scale(0)' }))
+      ])
+    ]),
+    trigger('rotate', [
+      transition(':enter', [
+        style({ transform: 'rotate(-360deg)', opacity: 0 }),
+        animate('1000ms ease-in-out', style({ transform: 'rotate(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-in-out', style({ transform: 'rotate(360deg)', opacity: 0 }))
+      ])
+    ]),
+    trigger('zoomInOut', [
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),
+        animate('1000ms ease-in', style({ transform: 'scale(1)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-out', style({ transform: 'scale(0.5)', opacity: 0 }))
+      ])
+    ]),
+    trigger('bounce', [
+      transition(':enter', [
+        animate(
+          '1000ms ease-in',
+          keyframes([
+            style({ transform: 'translateY(0)', offset: 0 }),
+            style({ transform: 'translateY(-30px)', offset: 0.3 }),
+            style({ transform: 'translateY(0)', offset: 0.5 }),
+            style({ transform: 'translateY(-15px)', offset: 0.7 }),
+            style({ transform: 'translateY(0)', offset: 1 })
+          ])
+        )
+      ]),
+      transition(':leave', [
+        animate(
+          '1000ms ease-out',
+          keyframes([
+            style({ transform: 'translateY(0)', offset: 0 }),
+            style({ transform: 'translateY(30px)', offset: 0.3 }),
+            style({ transform: 'translateY(0)', offset: 1 })
+          ])
+        )
+      ])
+    ])
+  ]
+
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   isDarkMode = true;
   severities = ["success", "secondary", "info", "warning", "danger", "contrast"];
   menuItems: any[] = [];
   severityMap = new Map();
   jsonData = jsonData;
   cd=0;
-  enterClass = "flipright";
+  enterClass = "flip";
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
   visitorCount: number = 0;
+  @ViewChild('socialContainer') socialContainer!: ElementRef;
+  animationClasses: string[] = [];
 
   constructor(private dataService: DataService) {
     this.fetchData();
     this.updateMenu();
     this.updateVisitorCount();
+
+  }
+  ngOnInit(): void {
+    this.animationClasses = [
+      `zoomin animation-duration-500 animation-iteration-1`,
+      `zoomin animation-duration-500 animation-iteration-1 animation-delay-300`,
+      `zoomin animation-duration-500 animation-iteration-1 animation-delay-500`,
+      `zoomin animation-duration-500 animation-iteration-1 animation-delay-1000`,
+    ];
   }
 
-  onSocialClicked(selectedSocial: any) {
-    window.open(selectedSocial.prefix + selectedSocial.value);
+  onSocialClicked(link: any) {
+    window.open(link);
   }
 
-get cardAnimation(): string {
-  this.cd = this.cd + 100;
-  return 'animation-duration-1000 '+'animation-delay-'+this.cd;
-}
-  getRandomSeverity(s: any): any {
+  getSeverity(s: any): any {
     this.severityIndex = this.severities.length > this.severityIndex ? ++this.severityIndex : this.severityIndex = 0;
     if (this.severityMap.get(s)) {
       this.severityMap.get(s)
@@ -149,4 +231,9 @@ get cardAnimation(): string {
       }
     );
   }
+
+
+
+
+
 }

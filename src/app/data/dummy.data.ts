@@ -2,30 +2,44 @@ export const jsonData = {
   aboutMe: "Software engineer with 4 years of experience in Java, Spring Boot, and Angular. Skilled in optimizing\n" +
     "high-load systems, AWS cloud, and resolving customer issues. Experienced in on-call support and mentoring junior developers.\n" +
     "Focused on building scalable applications and improving system performance.",
-  socials: {
-    'linkedin': {
-      title: 'LinkedIn',
+  socials: [
+    {
+      platform: 'linkedin',
+      label: 'bodrulamin',
       value: 'https://linkedin.com/in/bodrulamin',
-      prefix: ''
+      link: 'https://linkedin.com/in/bodrulamin',
+      icon: 'fa-brands fa-linkedin-in',
+      severity: 'info',
+      text: true
     },
-    'github': {
-      title: 'Github',
-      value: 'https://github.com/bodrulamin',
-      prefix: ''
-    },
-    'email': {
-      title: 'Email',
+    {
+      platform: 'email',
+      label: 'bodrulaminiu@gmail.com',
       value: 'bodrulaminiu@gmail.com',
-      prefix: ('mailto:')
-
+      link: 'mailto:bodrulaminiu@gmail.com',
+      icon: 'fa fa-envelope',
+      severity: 'danger',
+      text: true
     },
-    'phone': {
-      title: 'Phone Number',
+    {
+      platform: 'github',
+      label: 'bodrulamin',
+      value: 'https://github.com/bodrulamin',
+      link: 'https://github.com/bodrulamin',
+      icon: 'fa-brands fa-github',
+      severity: 'secondary',
+      text: true
+    },
+    {
+      platform: 'phone',
+      label: '+8801725717136',
       value: '+8801725717136',
-      prefix: 'tel:'
-    },
-
-  },
+      link: 'tel:+8801725717136',
+      icon: 'fa fa-phone',
+      severity: 'success',
+      text: true
+    }
+  ],
   skill: [
     "Java, Javascript, Typescript, Spring Boot, Hibernate, Angular, AngularJS, PostgreSQL, Oracle, Firestore"
   ],
