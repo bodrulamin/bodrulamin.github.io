@@ -1,29 +1,28 @@
 import {Component, ElementRef, inject, OnInit, viewChild, ViewChild} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Button } from "primeng/button";
-import { ToolbarModule } from "primeng/toolbar";
-import { SplitButtonModule } from "primeng/splitbutton";
-import { InputTextModule } from "primeng/inputtext";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { InputGroupModule } from "primeng/inputgroup";
-import { InputGroupAddonModule } from "primeng/inputgroupaddon";
-import { ChipsModule } from "primeng/chips";
-import { DOCUMENT, KeyValuePipe, NgForOf, NgIf } from "@angular/common";
-import { PanelModule } from "primeng/panel";
-import { DataService } from "./data/data.service";
-import { CardModule } from "primeng/card";
-import { ChipModule } from "primeng/chip";
-import { TagModule } from "primeng/tag";
-import { InputSwitchModule } from "primeng/inputswitch";
-import { FormsModule } from "@angular/forms";
-import { TimelineModule } from "primeng/timeline";
-import { CarouselModule } from "primeng/carousel";
-import { MenuModule } from "primeng/menu";
-import { jsonData } from "./data/dummy.data";
-import { AnimateModule } from 'primeng/animate';
+import {RouterOutlet} from '@angular/router';
+import {Button} from "primeng/button";
+import {ToolbarModule} from "primeng/toolbar";
+import {SplitButtonModule} from "primeng/splitbutton";
+import {InputTextModule} from "primeng/inputtext";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {InputGroupModule} from "primeng/inputgroup";
+import {InputGroupAddonModule} from "primeng/inputgroupaddon";
+import {ChipsModule} from "primeng/chips";
+import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
+import {PanelModule} from "primeng/panel";
+import {DataService} from "./data/data.service";
+import {CardModule} from "primeng/card";
+import {ChipModule} from "primeng/chip";
+import {TagModule} from "primeng/tag";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {FormsModule} from "@angular/forms";
+import {TimelineModule} from "primeng/timeline";
+import {CarouselModule} from "primeng/carousel";
+import {MenuModule} from "primeng/menu";
+import {jsonData} from "./data/dummy.data";
+import {AnimateModule} from 'primeng/animate';
 import {AnimateOnScrollModule} from "primeng/animateonscroll";
-import {animate, keyframes, style, transition, trigger} from "@angular/animations";
-type SocialPlatform = 'linkedin' | 'github' | 'email' | 'phone';
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
@@ -34,47 +33,47 @@ type SocialPlatform = 'linkedin' | 'github' | 'email' | 'phone';
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
-        style({ opacity: 0 }),
-        animate('1000ms ease-in', style({ opacity: 1 }))
+        style({opacity: 0}),
+        animate('1000ms ease-in', style({opacity: 1}))
       ]),
       transition(':leave', [
-        animate('500ms ease-out', style({ opacity: 0 }))
+        animate('500ms ease-out', style({opacity: 0}))
       ])
     ]),
     trigger('slideIn', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('1000ms ease-out', style({ transform: 'translateX(0)' }))
+        style({transform: 'translateX(-100%)'}),
+        animate('1000ms ease-out', style({transform: 'translateX(0)'}))
       ]),
       transition(':leave', [
-        animate('1000ms ease-in', style({ transform: 'translateX(-100%)' }))
+        animate('1000ms ease-in', style({transform: 'translateX(-100%)'}))
       ])
     ]),
     trigger('scaleUp', [
       transition(':enter', [
-        style({ transform: 'scale(0)' }),
-        animate('1000ms ease-in', style({ transform: 'scale(1)' }))
+        style({transform: 'scale(0)'}),
+        animate('1000ms ease-in', style({transform: 'scale(1)'}))
       ]),
       transition(':leave', [
-        animate('1000ms ease-out', style({ transform: 'scale(0)' }))
+        animate('1000ms ease-out', style({transform: 'scale(0)'}))
       ])
     ]),
     trigger('rotate', [
       transition(':enter', [
-        style({ transform: 'rotate(-360deg)', opacity: 0 }),
-        animate('1000ms ease-in-out', style({ transform: 'rotate(0)', opacity: 1 }))
+        style({transform: 'rotate(-360deg)', opacity: 0}),
+        animate('1000ms ease-in-out', style({transform: 'rotate(0)', opacity: 1}))
       ]),
       transition(':leave', [
-        animate('1000ms ease-in-out', style({ transform: 'rotate(360deg)', opacity: 0 }))
+        animate('1000ms ease-in-out', style({transform: 'rotate(360deg)', opacity: 0}))
       ])
     ]),
     trigger('zoomInOut', [
       transition(':enter', [
-        style({ transform: 'scale(0.5)', opacity: 0 }),
-        animate('1000ms ease-in', style({ transform: 'scale(1)', opacity: 1 }))
+        style({transform: 'scale(0.5)', opacity: 0}),
+        animate('1000ms ease-in', style({transform: 'scale(1)', opacity: 1}))
       ]),
       transition(':leave', [
-        animate('1000ms ease-out', style({ transform: 'scale(0.5)', opacity: 0 }))
+        animate('1000ms ease-out', style({transform: 'scale(0.5)', opacity: 0}))
       ])
     ]),
     trigger('bounce', [
@@ -82,11 +81,11 @@ type SocialPlatform = 'linkedin' | 'github' | 'email' | 'phone';
         animate(
           '1000ms ease-in',
           keyframes([
-            style({ transform: 'translateY(0)', offset: 0 }),
-            style({ transform: 'translateY(-30px)', offset: 0.3 }),
-            style({ transform: 'translateY(0)', offset: 0.5 }),
-            style({ transform: 'translateY(-15px)', offset: 0.7 }),
-            style({ transform: 'translateY(0)', offset: 1 })
+            style({transform: 'translateY(0)', offset: 0}),
+            style({transform: 'translateY(-30px)', offset: 0.3}),
+            style({transform: 'translateY(0)', offset: 0.5}),
+            style({transform: 'translateY(-15px)', offset: 0.7}),
+            style({transform: 'translateY(0)', offset: 1})
           ])
         )
       ]),
@@ -94,9 +93,9 @@ type SocialPlatform = 'linkedin' | 'github' | 'email' | 'phone';
         animate(
           '1000ms ease-out',
           keyframes([
-            style({ transform: 'translateY(0)', offset: 0 }),
-            style({ transform: 'translateY(30px)', offset: 0.3 }),
-            style({ transform: 'translateY(0)', offset: 1 })
+            style({transform: 'translateY(0)', offset: 0}),
+            style({transform: 'translateY(30px)', offset: 0.3}),
+            style({transform: 'translateY(0)', offset: 1})
           ])
         )
       ])
@@ -104,18 +103,17 @@ type SocialPlatform = 'linkedin' | 'github' | 'email' | 'phone';
   ]
 
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   isDarkMode = true;
   severities = ["success", "secondary", "info", "warning", "danger", "contrast"];
   menuItems: any[] = [];
   severityMap = new Map();
   jsonData = jsonData;
-  cd=0;
   enterClass = "flip";
   private severityIndex: number = Math.floor(Math.random() * this.severities.length);
   visitorCount: number = 0;
-  @ViewChild('socialContainer') socialContainer!: ElementRef;
-  animationClasses: string[] = [];
+  aboutMeHeader = 'About Me';
+
 
   constructor(private dataService: DataService) {
     this.fetchData();
@@ -123,13 +121,9 @@ export class AppComponent implements OnInit{
     this.updateVisitorCount();
 
   }
+
   ngOnInit(): void {
-    this.animationClasses = [
-      `zoomin animation-duration-500 animation-iteration-1`,
-      `zoomin animation-duration-500 animation-iteration-1 animation-delay-300`,
-      `zoomin animation-duration-500 animation-iteration-1 animation-delay-500`,
-      `zoomin animation-duration-500 animation-iteration-1 animation-delay-1000`,
-    ];
+
   }
 
   onSocialClicked(link: any) {
@@ -213,8 +207,14 @@ export class AppComponent implements OnInit{
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({behavior: 'smooth'});
+      let targetDiv = section.querySelector('.p-card-title.ng-star-inserted');
+      this.animateInnerHtml(targetDiv);
+
     }
+
+
   }
+
 
   protected readonly window = window;
 
@@ -233,7 +233,30 @@ export class AppComponent implements OnInit{
   }
 
 
+  nameClick() {
 
+  }
 
+  private animateInnerHtml(targetDiv: Element) {
 
+    let upper: any = targetDiv.innerHTML;
+    let original: string = upper + '';
+    let time = 0;
+
+    for (let index = 0; index < upper.length; index++) {
+      time += 200; // Increment delay for each letter
+      let invCase = upper[index] === upper[index].toUpperCase()
+        ? upper[index].toLowerCase()
+        : upper[index].toUpperCase();
+
+      let first = original.substring(0, index);
+      let last = original.substring(index + 1);
+
+      setTimeout(() => {
+        let updatedText = first + invCase + last;
+        targetDiv.innerHTML = updatedText;
+      }, time);
+    }
+
+  }
 }

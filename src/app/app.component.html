@@ -1,19 +1,19 @@
 <p-toolbar>
   <!-- Start Group -->
   <div class="p-toolbar-group-start flex flex-grow-1">
-    <p-button [text]="true" icon="pi pi-web" label="Bodrul Amin"></p-button>
+    <p-button (onClick)="nameClick()" [text]="true" icon="pi pi-web" label="Bodrul Amin"></p-button>
   </div>
   <!-- End Group for Desktop -->
   <div class="p-toolbar-group-end hidden md:flex flex-wrap flex-grow-0">
-    <p-button [text]="true" (onClick)="aboutMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+    <p-button [text]="true" (onClick)="scrollToSection('aboutMe')"
       severity="secondary" label="About"></p-button>
-    <p-button [text]="true" (onClick)="skill.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+    <p-button [text]="true" (onClick)="scrollToSection('skill')"
       severity="secondary" label="Skills"></p-button>
-    <p-button [text]="true" (onClick)="experience.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+    <p-button [text]="true" (onClick)="scrollToSection('experience')"
       severity="secondary" label="Experience"></p-button>
-    <p-button [text]="true" (onClick)="portfolio.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+    <p-button [text]="true" (onClick)="scrollToSection('portfolio')"
       severity="secondary" label="Portfolio"></p-button>
-    <p-button [text]="true" (onClick)="contactMe.getBlockableElement().scrollIntoView({ behavior: 'smooth' })"
+    <p-button [text]="true" (onClick)="scrollToSection('contactMe')"
       severity="secondary" label="Contact Me"></p-button>
     <p-button [text]="true" severity="secondary" [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" [label]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
       (click)="toggleDarkMode()"></p-button>
